@@ -1,0 +1,79 @@
+{
+  "name": "azcon-energy-mcp",
+  "displayName": "Azcon Energy & Brazilian B2B Intelligence",
+  "description": "Real-time Brazilian corporate dossiers (CNPJ, QSA Partners, Capital), estimated electricity consumption (kWh/month), and high-precision solar photovoltaic physics (PVGIS / ANEEL / EDP-ES). Powered by HTTP 402 (x402) micropayments on Base and Solana.",
+  "version": "1.0.0",
+  "homepage": "https://azconenergy.com.br",
+  "license": "MIT",
+  "runtime": "node",
+  "entrypoint": "mcp-server.cjs",
+  "startCommand": {
+    "type": "stdio",
+    "command": "node",
+    "args": ["mcp-server.cjs"]
+  },
+  "endpoints": {
+    "x402Catalog": "https://azconenergy.com.br/api/x402/catalog",
+    "x402Health": "https://azconenergy.com.br/api/x402/health",
+    "openApiSpec": "https://azconenergy.com.br/x402-openapi.json"
+  },
+  "tools": [
+    {
+      "name": "get_brazilian_company_energy_profile",
+      "description": "Fetch official Brazilian company data (CNPJ, QSA partners, legal status, capital) enriched with estimated monthly electricity consumption (kWh) and rooftop solar photovoltaic viability.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "cnpj": {
+            "type": "string",
+            "description": "14-digit Brazilian CNPJ number (with or without punctuation)"
+          }
+        },
+        "required": ["cnpj"]
+      }
+    },
+    {
+      "name": "calculate_solar_geometry_and_yield",
+      "description": "Calculate solar photovoltaic yield, optimal tilt, azimuth, PVGIS European Joint Research Commission radiation, and ANEEL electricity bill savings.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "monthlyKwh": {
+            "type": "number",
+            "description": "Monthly energy consumption in kWh"
+          },
+          "city": {
+            "type": "string",
+            "description": "City name in Brazil (e.g. Vitória, Serra, Linhares, São Paulo)"
+          },
+          "uf": {
+            "type": "string",
+            "description": "2-letter state code (e.g. ES, SP, RJ, MG)"
+          },
+          "tariffGroup": {
+            "type": "string",
+            "description": "Tariff group: B1 (Residential), B3 (Commercial), A4 (Industrial)"
+          }
+        },
+        "required": ["monthlyKwh"]
+      }
+    },
+    {
+      "name": "get_aneel_tariff_benchmark",
+      "description": "Get current homologated electricity tariffs from ANEEL (National Electric Energy Agency) for EDP Espírito Santo and Southeastern distribution concessions, including TE, TUSD, and Fio B transition status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "concessionaire": {
+            "type": "string",
+            "description": "Electricity distributor (e.g. EDP-ES, Enel, Cemig, Light)"
+          },
+          "tariffGroup": {
+            "type": "string",
+            "description": "B1, B2, B3 or A4"
+          }
+        }
+      }
+    }
+  ]
+}
