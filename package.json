@@ -1,0 +1,26 @@
+{
+  "name": "@azcon/agentkit-action-provider",
+  "version": "1.0.0",
+  "description": "Official Coinbase AgentKit Action Provider for Brazilian Corporate Intelligence, Photovoltaic Physics, and ANEEL/EDP-ES Electricity Tariffs.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "keywords": [
+    "coinbase",
+    "agentkit",
+    "action-provider",
+    "ai-agents",
+    "solar-energy",
+    "brazil",
+    "cnpj",
+    "x402",
+    "base"
+  ],
+  "author": "Azcon Energy Ltda",
+  "license": "MIT",
+  "homepage": "https://azconenergy.com.br",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azcondigital-max/sistemaazcon.git",
+    "directory": "tools/coinbase-agentkit"
+  }
+}
